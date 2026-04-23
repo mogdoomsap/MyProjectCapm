@@ -1,0 +1,114 @@
+### Get Service Document - get the entity
+http://localhost:4004/odata/v4/CatalogueService/
+
+### Get Service Metatadata Doc
+http://localhost:4004/odata/v4/CatalogueService/$metadata
+
+### Get all Employee set data in JSON Format
+http://localhost:4004/odata/v4/CatalogueService/EmployeeSet?$format=json
+
+### Get data chunk by chunk
+http://localhost:4004/odata/v4/CatalogueService/EmployeeSet?$skip=2&top=3
+
+### Get Filter data
+http://localhost:4004/odata/v4/CatalogueService/EmployeeSet?$filter=salaryAmount eq 85962
+
+### filter contains
+http://localhost:4004/odata/v4/CatalogueService/EmployeeSet?$filter=contains(nameFirst,'Su')
+
+### Count the Employees
+http://localhost:4004/odata/v4/CatalogueService/EmployeeSet/$count
+
+### To get only limited Fields
+http://localhost:4004/odata/v4/CatalogueService/EmployeeSet?$select=ID,nameFirst,nameLast
+
+### Insert new Employee
+POST http://localhost:4004/odata/v4/CatalogueService/EmployeeSet
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nameFirst": "Mogdoom",
+  "nameMiddle": "Khan",
+  "nameLast": "Sahib",
+  "nameInitials": null,
+  "sex": "M",
+  "language": "E",
+  "phoneNumber": null,
+  "email": "mog@info.com",
+  "loginName": "Mogdoomk",
+  "Currency_code": "USD",
+  "salaryAmount": 89000,
+  "accountNumber": "8877665511",
+  "bankId": "12100032",
+  "bankName": "My Bank of San Francisco"
+}
+
+### Change Employee Data
+PATCH http://localhost:4004/odata/v4/CatalogueService/EmployeeSet/0ccb78d1-1150-43ba-8e00-e6f6824691a6
+Content-Type: application/json
+
+{
+"salaryAmount": 95000
+}
+
+### Remove the Employee
+DELETE http://localhost:4004/odata/v4/CatalogueService/EmployeeSet/0ccb78d1-1150-43ba-8e00-e6f6824691a6
+
+#For Transaction db
+### Get the records
+http://localhost:4004/odata/v4/CatalogueService/POS
+
+###Get Single PO
+http://localhost:4004/odata/v4/CatalogueService/POS/74867AD200E41EDBA5D8B0C98DC2A052
+
+### Load Dependent data to PO - Wehave done association
+http://localhost:4004/odata/v4/CatalogueService/POS/74867AD200E41EDBA5D8B0C98DC2A052/Items
+
+### Load Header data and Items data in a single call
+http://localhost:4004/odata/v4/CatalogueService/POS/74867AD200E41EDBA5D8B0C98DC2A052?$expand=Items
+
+### Calling Boost Service - Actions must be called via POST
+POST http://localhost:4004/odata/v4/CatalogueService/POS('74867AD200E41EDBA5D8B0C98DC2A052')/CatalogueService.boost
+Content-Type: application/json
+
+{
+  
+}
+
+### Using Functions -we use only get
+http://localhost:4004/odata/v4/CatalogueService/getLargestOrder()
+
+
+###Generic Handlers
+PATCH http://localhost:4004/odata/v4/CatalogueService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C197A7FB
+Content-Type: application/json
+
+{
+"salaryAmount": 10000000
+}
+
+### Performing read only
+http://localhost:4004/odata/v4/MyService/ReadEmployee
+
+### Trying to update
+POST http://localhost:4004/odata/v4/MyService/ReadEmployee
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nameFirst": "Mogdoom",
+  "nameMiddle": "Khan",
+  "nameLast": "Sahib",
+  "nameInitials": null,
+  "sex": "M",
+  "language": "E",
+  "phoneNumber": null,
+  "email": "mog@info.com",
+  "loginName": "Mogdoomk",
+  "Currency_code": "USD",
+  "salaryAmount": 89000,
+  "accountNumber": "8877665511",
+  "bankId": "12100032",
+  "bankName": "My Bank of San Francisco"
+}
